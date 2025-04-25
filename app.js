@@ -33,8 +33,9 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
     const encounter = {
         resourceType: "Encounter",
         status: "in-progress",
-    
-        },
+        class: [{
+            code: "AMB"
+        }],
         type: [{
             text: encounterType
         }],
@@ -42,7 +43,10 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
             reference: `Patient/${patientId}`,
             display: patientName
         },
-       
+        period: {
+            start: startDateTime,
+            end: endDateTime
+        }
     };
 
     // Enviar los datos usando Fetch API

@@ -33,10 +33,7 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
     const encounter = {
         resourceType: "Encounter",
         status: "in-progress",
-        class: {
-            system: "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            code: "AMB", // Ambulatory
-            display: "Ambulatory"
+    
         },
         type: [{
             text: encounterType
@@ -45,10 +42,7 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
             reference: `Patient/${patientId}`,
             display: patientName
         },
-        period: {
-            start: startDateTime,
-            end: endDateTime
-        }
+       
     };
 
     // Enviar los datos usando Fetch API

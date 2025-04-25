@@ -52,7 +52,7 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
     };
 
     // Enviar los datos usando Fetch API
-    fetch('https://hl7-fhir-ehr-ana-006.onrender.com/encounter', {
+    fetch('https://hl7-fhir-ehr-ana-006.onrender.com/Encounter', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

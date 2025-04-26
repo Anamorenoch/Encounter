@@ -9,9 +9,6 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
     const patientId = document.getElementById('patientId').value;
     const patientName = document.getElementById('patientName').value;
     const encounterType = document.getElementById('encounterType').value;
-
-    }
-
     const pad = n => n.toString().padStart(2, '0');
 
     }

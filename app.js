@@ -1,6 +1,10 @@
 document.getElementById('encounterForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
+
+
+
+    
     // Obtener los valores del formulario
     const patientId = document.getElementById('patientId').value;
     const patientName = document.getElementById('patientName').value;

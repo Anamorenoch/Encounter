@@ -1,20 +1,13 @@
 document.getElementById('encounterForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-
-
-
     
     // Obtener los valores del formulario
     const patientId = document.getElementById('patientId').value;
     const patientName = document.getElementById('patientName').value;
     const encounterType = document.getElementById('encounterType').value;
     const pad = n => n.toString().padStart(2, '0');
-
-    }
-
-   
-
+    
     // Crear objeto Encounter en formato FHIR
     const encounter = {
         resourceType: "Encounter",

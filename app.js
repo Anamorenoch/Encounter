@@ -16,10 +16,9 @@ document.getElementById('encounterForm').addEventListener('submit', async functi
     }
 
     // Validar que la fecha no sea anterior a hoy (sí se permite hoy)
-    const selectedDate = new Date(encounterDate);
+    const selectedDate = new Date(`${encounterDate}T00:00:00`);
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Ignorar la hora al comparar
-    selectedDate.setHours(0, 0, 0, 0); // También limpiar hora de la fecha seleccionada
 
     if (selectedDate < today) {
         alert('La fecha del encuentro no puede ser anterior a hoy.');

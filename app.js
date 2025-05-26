@@ -8,6 +8,16 @@ document.getElementById('encounterForm').addEventListener('submit', async functi
     const encounterTime = document.getElementById('encounterTime').value;
     const encounterType = document.getElementById('encounterType').value;
 
+    // 🕒 Validar que la fecha NO sea anterior a hoy (hoy sí se permite)
+    const selectedDate = new Date(encounterDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Ignorar hora, comparar solo fechas
+
+    if (selectedDate < today) {
+        alert('La fecha del encuentro no puede ser anterior a hoy.');
+        return;
+    }
+
     // Validar hora entre 08:00 y 20:00
     const [hour, minute] = encounterTime.split(':').map(Number);
     if (hour < 8 || hour >= 20) {

@@ -1,66 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Encuentro HL7 FHIR</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Encuentro HL7 FHIR</title>
 </head>
 <body>
-    <h1>Formulario de Encuentro HL7 FHIR</h1>
-    <form id="encounterForm">
-        <label for="patientId">ID del paciente:</label>
-        <input type="text" id="patientId" name="patientId" required><br><br>
+  <h1>Formulario de Encuentro HL7 FHIR</h1>
+  <form id="encounterForm">
+    <label for="patientId">ID del paciente:</label>
+    <input type="text" id="patientId" name="patientId" required><br><br>
 
-        <label for="patientName">Nombre del paciente:</label>
-        <input type="text" id="patientName" name="patientName" required><br><br>
+    <label for="patientName">Nombre del paciente:</label>
+    <input type="text" id="patientName" name="patientName" required><br><br>
 
-        <label for="encounterDate">Fecha del encuentro:</label>
-        <input type="date" id="encounterDate" name="encounterDate" required><br><br>
+    <label for="encounterDate">Fecha del encuentro:</label>
+    <input type="date" id="encounterDate" name="encounterDate" required><br><br>
 
-        <label for="encounterTime">Hora del encuentro:</label>
-        <input type="time" id="encounterTime" name="encounterTime" required><br><br>
+    <label for="encounterTime">Hora del encuentro:</label>
+    <input type="time" id="encounterTime" name="encounterTime" required><br><br>
 
-        <label for="encounterType">Tipo de encuentro:</label>
-        <input type="text" id="encounterType" name="encounterType" required><br><br>
+    <label for="encounterType">Tipo de encuentro:</label>
+    <input type="text" id="encounterType" name="encounterType" required><br><br>
 
-        <!-- CAMPO DIAGNÓSTICO -->
-        <label for="diagnosis">Diagnóstico:</label><br>
-        <textarea id="diagnosis" name="diagnosis" ></textarea><br><br>
+    <!-- Diagnóstico -->
+    <label for="diagnosis">Diagnóstico:</label>
+    <textarea id="diagnosis" name="diagnosis" ></textarea><br><br>
 
-        <!-- MEDICAMENTOS -->
-        <label>¿Requiere medicamentos?</label><br>
-        <input type="radio" id="medYes" name="medRequired" value="Sí">
-        <label for="medYes">Sí</label>
-        <input type="radio" id="medNo" name="medRequired" value="No">
-        <label for="medNo">No</label><br>
-        <label for="medDetail">¿Cuál?</label><br>
-        <input type="text" id="medDetail" name="medDetail" placeholder="Ej. Paracetamol"><br><br>
+    <!-- Medicamentos -->
+    <label>¿Requiere medicamentos?</label><br>
+    <input type="radio" id="medYes" name="requiresMed" value="yes">
+    <label for="medYes">Sí</label>
+    <input type="radio" id="medNo" name="requiresMed" value="no" checked>
+    <label for="medNo">No</label><br>
+    <label for="medDetails">¿Cuál?</label>
+    <input type="text" id="medDetails" name="medDetails" disabled><br><br>
 
-        <!-- EXÁMENES -->
-        <label>¿Requiere algún examen?</label><br>
-        <input type="radio" id="examYes" name="examRequired" value="Sí">
-        <label for="examYes">Sí</label>
-        <input type="radio" id="examNo" name="examRequired" value="No">
-        <label for="examNo">No</label><br>
-        <label for="examDetail">¿Cuál?</label><br>
-        <input type="text" id="examDetail" name="examDetail" placeholder="Ej. Hemograma"><br><br>
+    <!-- Exámenes -->
+    <label>¿Requiere algún examen?</label><br>
+    <input type="radio" id="examYes" name="requiresExam" value="yes">
+    <label for="examYes">Sí</label>
+    <input type="radio" id="examNo" name="requiresExam" value="no" checked>
+    <label for="examNo">No</label><br>
+    <label for="examDetails">¿Cuál?</label>
+    <input type="text" id="examDetails" name="examDetails" disabled><br><br>
 
-        <button type="submit">Registrar Encuentro</button>
-    </form>
+    <button type="submit">Registrar Encuentro</button>
+  </form>
 
-    <script>
-        // Limitar la fecha del encuentro solo al día actual
-        const today = new Date().toISOString().split('T')[0];
-        const dateInput = document.getElementById('encounterDate');
-        dateInput.value = today;
-        dateInput.min = today;
-        dateInput.max = today;
-    </script>
+  <script>
+    // Limitar la fecha al día actual
+    const today = new Date().toISOString().split('T')[0];
+    const dateInput = document.getElementById('encounterDate');
+    dateInput.value = today;
+    dateInput.min = today;
+    dateInput.max = today;
 
-    <script src="app.js"></script>
-</body>
-</html>
+    // Habilitar o deshabilitar campos según selección
+    function toggleField(radioName, textFieldId) {
+      const yes = document.querySelector(`input[name="${radioName}"][value="yes"]`);
+      const no = document.querySelector(`input[name="${radioName}"][value="no"]`);
+      const textField = document.getElementById(textFieldId);
 
-    <script src="app.js"></script>
+      function updateField() {
+        if (yes.checked) {
+          textField.disabled = false;
+          textField.required = true;
+        } else {
+          textField.disabled = true;
+          textField.required = false;
+          textField.value = ''; // limpiar si se desactiva
+        }
+      }
+
+      yes.addEventListener('change', updateField);
+      no.addEventListener('change', updateField);
+    }
+
+    toggleField("requiresMed", "medDetails");
+    toggleField("requiresExam", "examDetails");
+  </script>
+
+  <script src="app.js"></script>
 </body>
 </html>

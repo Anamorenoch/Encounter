@@ -9,24 +9,23 @@
     <h1>Formulario de Encuentro HL7 FHIR</h1>
     <form id="encounterForm">
         <label for="patientId">ID del paciente:</label>
-        <input type="text" id="patientId" name="patientId" required><br>
-        <br>
+        <input type="text" id="patientId" name="patientId" required><br><br>
 
         <label for="patientName">Nombre del paciente:</label>
-        <input type="text" id="patientName" name="patientName" required><br>
-        <br>
+        <input type="text" id="patientName" name="patientName" required><br><br>
 
         <label for="encounterDate">Fecha del encuentro:</label>
-        <input type="date" id="encounterDate" name="encounterDate" required><br>
-        <br>
+        <input type="date" id="encounterDate" name="encounterDate" required><br><br>
 
         <label for="encounterTime">Hora del encuentro:</label>
-        <input type="time" id="encounterTime" name="encounterTime" required><br>
-        <br>
+        <input type="time" id="encounterTime" name="encounterTime" required><br><br>
 
         <label for="encounterType">Tipo de encuentro:</label>
-        <input type="text" id="encounterType" name="encounterType" required><br>
-        <br>
+        <input type="text" id="encounterType" name="encounterType" required><br><br>
+
+        <!-- Campo adicional para diagnóstico que NO se enviará -->
+        <label for="diagnosis">Diagnóstico (solo visible):</label>
+        <textarea id="diagnosis" name="diagnosis" rows="4" cols="50" placeholder="Escribe aquí el diagnóstico si deseas..."></textarea><br><br>
 
         <button type="submit">Registrar Encuentro</button>
     </form>

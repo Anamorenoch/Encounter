@@ -15,17 +15,13 @@ document.getElementById('encounterForm').addEventListener('submit', async functi
         return;
     }
 
-    // Validar que la fecha no sea anterior a hoy
-    const selectedDateParts = encounterDate.split('-').map(Number); // [YYYY, MM, DD]
+    // Validar que la fecha no sea anterior a hoy (sí se permite hoy)
+    const selectedDate = new Date(encounterDate);
     const today = new Date();
-    const todayParts = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
+    today.setHours(0, 0, 0, 0); // Ignorar la hora al comparar
+    selectedDate.setHours(0, 0, 0, 0); // También limpiar hora de la fecha seleccionada
 
-    const isBeforeToday =
-        selectedDateParts[0] < todayParts[0] ||
-        (selectedDateParts[0] === todayParts[0] && selectedDateParts[1] < todayParts[1]) ||
-        (selectedDateParts[0] === todayParts[0] && selectedDateParts[1] === todayParts[1] && selectedDateParts[2] < todayParts[2]);
-
-    if (isBeforeToday) {
+    if (selectedDate < today) {
         alert('La fecha del encuentro no puede ser anterior a hoy.');
         return;
     }

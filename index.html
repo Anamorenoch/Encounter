@@ -23,9 +23,27 @@
         <label for="encounterType">Tipo de encuentro:</label>
         <input type="text" id="encounterType" name="encounterType" required><br><br>
 
-        <!-- Campo adicional para diagnóstico que NO se enviará -->
-        <label for="diagnosis">Diagnóstico :</label>
+        <!-- CAMPO DIAGNÓSTICO -->
+        <label for="diagnosis">Diagnóstico:</label><br>
         <textarea id="diagnosis" name="diagnosis" ></textarea><br><br>
+
+        <!-- MEDICAMENTOS -->
+        <label>¿Requiere medicamentos?</label><br>
+        <input type="radio" id="medYes" name="medRequired" value="Sí">
+        <label for="medYes">Sí</label>
+        <input type="radio" id="medNo" name="medRequired" value="No">
+        <label for="medNo">No</label><br>
+        <label for="medDetail">¿Cuál?</label><br>
+        <input type="text" id="medDetail" name="medDetail" placeholder="Ej. Paracetamol"><br><br>
+
+        <!-- EXÁMENES -->
+        <label>¿Requiere algún examen?</label><br>
+        <input type="radio" id="examYes" name="examRequired" value="Sí">
+        <label for="examYes">Sí</label>
+        <input type="radio" id="examNo" name="examRequired" value="No">
+        <label for="examNo">No</label><br>
+        <label for="examDetail">¿Cuál?</label><br>
+        <input type="text" id="examDetail" name="examDetail" placeholder="Ej. Hemograma"><br><br>
 
         <button type="submit">Registrar Encuentro</button>
     </form>
@@ -38,6 +56,10 @@
         dateInput.min = today;
         dateInput.max = today;
     </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
 
     <script src="app.js"></script>
 </body>

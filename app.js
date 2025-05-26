@@ -15,14 +15,24 @@ document.getElementById('encounterForm').addEventListener('submit', async functi
         return;
     }
 
-    // Validar que la fecha no sea anterior a hoy (sí se permite hoy)
+    // Validar que la fecha no sea anterior a hoy
     const selectedDate = new Date(`${encounterDate}T00:00:00`);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Ignorar la hora al comparar
+    today.setHours(0, 0, 0, 0); // Ignorar hora al comparar
 
     if (selectedDate < today) {
         alert('La fecha del encuentro no puede ser anterior a hoy.');
         return;
+    }
+
+    // Si la fecha es hoy, validar que la hora aún no haya pasado
+    if (selectedDate.getTime() === today.getTime()) {
+        const now = new Date();
+        const selectedTime = new Date(`${encounterDate}T${encounterTime}`);
+        if (selectedTime < now) {
+            alert('La hora seleccionada ya ha pasado. Por favor elige una hora futura.');
+            return;
+        }
     }
 
     // Verificar si el paciente existe en la base de datos por identificador
@@ -98,7 +108,7 @@ document.getElementById('encounterForm').addEventListener('submit', async functi
             console.error('Error desde el servidor:', data.error);
         } else {
             console.log('Success:', data);
-            alert('Encuentro creado exitosamente!');
+            alert('¡Encuentro creado exitosamente!');
         }
     })
     .catch((error) => {

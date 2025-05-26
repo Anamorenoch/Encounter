@@ -1,4 +1,4 @@
-document.getElementById('encounterForm').addEventListener('submit', function(event) {
+document.getElementById('encounterForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     // Obtener los valores del formulario
@@ -12,6 +12,34 @@ document.getElementById('encounterForm').addEventListener('submit', function(eve
     const [hour, minute] = encounterTime.split(':').map(Number);
     if (hour < 8 || hour >= 20) {
         alert('La hora debe estar entre las 08:00 y las 20:00');
+        return;
+    }
+
+    // Verificar si el paciente existe en la base de datos por identificador
+    const system = "http://cedula";
+    const queryUrl = `https://hl7-fhir-ehr-ana-006.onrender.com/patient?system=${encodeURIComponent(system)}&value=${encodeURIComponent(patientId)}`;
+
+    try {
+        const checkResponse = await fetch(queryUrl);
+
+        if (checkResponse.status === 204) {
+            alert('Paciente no registrado. Por favor verifique el ID.');
+            return;
+        }
+
+        if (!checkResponse.ok) {
+            throw new Error(`Error del servidor: ${checkResponse.status}`);
+        }
+
+        const data = await checkResponse.json();
+        if (!data || Object.keys(data).length === 0) {
+            alert('Paciente no registrado. Por favor verifique el ID.');
+            return;
+        }
+
+    } catch (error) {
+        console.error('Error al verificar paciente:', error);
+        alert('Error al verificar el paciente. Inténtelo más tarde.');
         return;
     }
 
